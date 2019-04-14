@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <% include ./partials/head %>
+  <body>
+    <% include ./partials/nav %>
+
+    <div class="container">
+      <div class="card-deck mb-3 text-center">
+        <div class="card mb-4 shadow-sm">
+          <div class="card-header">
+            <h4 class="my-0 font-weight-normal">Sign Up</h4>
+          </div>
+          <div class="card-body">
+            <div class="jumbotron">
+              <h1>Success!</h1>
+              <p><%= user.first_name%></p>
+              <p><%= user.last_name%></p>
+              <p><%= user.username%></p>
+              <p><%= user.email%></p>
+              <p><%= user.password%></p>
+              <p>
+                <a class="btn btn-primary btn-lg" href="#" role="button"
+                  >Learn more</a
+                >
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <% include ./partials/footer %>
+    </div>
+  </body>
+</html>
