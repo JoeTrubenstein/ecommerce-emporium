@@ -17,7 +17,7 @@
         <a class="p-2 text-dark" href="/api/users/signup">Sign in</a>
         <% } else { %>
         <a class="p-2 text-dark" href="/api/users/edit-profile"
-          >loggedIn as <%= user.email %></a
+          >loggedIn as <%= user.profile.name %></a
         >
         <a class="p-2 text-dark" href="/api/users/logout">Logout</a>
 

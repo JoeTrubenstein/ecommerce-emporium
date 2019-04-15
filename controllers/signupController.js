@@ -1,5 +1,6 @@
 const User = require("../models/User");
 const bcrypt = require("bcrypt");
+const getGravatar = require("../utils/gravatar");
 
 module.exports = {
   checkExistEmail: (req, res, next) => {
@@ -59,9 +60,10 @@ module.exports = {
           });
         } else {
           let newUser = new User({
-            first_name: req.body.firstName,
-            last_name: req.body.lastName,
-            username: req.body.username,
+            profile: {
+              name: req.body.name,
+              picture: getGravatar(req.body.email)
+            },
             email: req.body.email,
             password: hash
           });
@@ -73,11 +75,61 @@ module.exports = {
                 message: err
               });
             } else {
-              res.render('welcome', {user})
+              req.logIn(user, function(err) {
+                if (err) {
+                  res.status(400).json({
+                    confirmation: false,
+                    message: err
+                  });
+                } else {
+                  res.redirect("/");
+                }
+              });
             }
           });
         }
       });
+    });
+  },
+  updateProfile: (params, id) => {
+    return new Promise((resolve, reject) => {
+      User.findOne({ _id: id })
+
+        .then(user => {
+          if (params.name) {
+            user.profile.name = params.name;
+          }
+
+          if (params.address) {
+            user.profile.address = params.address;
+          }
+
+          if (params.password) {
+            user.profile.password = params.password;
+          }
+
+          if (params.email) {
+            user.profile.email = params.email;
+          }
+
+          user
+            .save()
+            .then(user => {
+              resolve(user);
+            })
+            .catch(error => {
+              let errors = [];
+              errors.message = error;
+              errors.status = 400;
+              reject(errors);
+            });
+        })
+        .catch(error => {
+          let errors = [];
+          errors.message = error;
+          errors.status = 400;
+          reject(errors);
+        });
     });
   }
 };

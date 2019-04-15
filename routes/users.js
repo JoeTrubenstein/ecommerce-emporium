@@ -15,8 +15,6 @@ router.get("/signup", function(req, res, next) {
     return res.redirect("/");
   }
 
-  // neeed to get user from session variable
-
   res.render("signup", { errors: req.flash("loginMessage") });
 });
 
@@ -24,7 +22,6 @@ router.get("/login", function(req, res, next) {
   res.render("login", { title: "Express" });
 });
 
-/// this is not the correct way - ask pak for the .logout function
 router.get("/logout", function(req, res, next) {
   req.logout();
   res.redirect("/");
@@ -47,7 +44,20 @@ router.post(
 );
 
 router.get("/edit-profile", function(req, res, next) {
-  res.render("profile");
+  res.render('profile', { errors: req.flash('errors'), success: req.flash('success')})
+});
+
+router.post("/profile-update", function(req, res, next) {
+  signupController
+    .updateProfile(req.body, req.user._id)
+    .then(user => {
+      req.flash("success", "updated");
+      return res.redirect("/api/users/edit-profile");
+    })
+    .catch(error => {
+      req.flash("errors", error);
+      return res.redirect("/api/users/edit-profile");
+    });
 });
 
 module.exports = router;
