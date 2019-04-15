@@ -10,7 +10,7 @@ var usersRouter = require("./routes/users");
 var expressValidator = require("express-validator");
 var session = require("express-session");
 var flash = require("connect-flash");
-var passport = require("passport")
+var passport = require("passport");
 
 var MongoStore = require("connect-mongo")(session);
 
@@ -29,56 +29,66 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
-app.use(session({
-  resave: true,
-  saveUninitialized: true,
-  secret: process.env.SESSION_SECRET,
-  store: new MongoStore({url: process.env.MONGODB_URI, autoReconnect: true}),
-  cookie: {
-    secure: false,
-    maxAge: 365 * 24 * 60 * 60 * 1000
-  }
-}))
+app.use(
+  session({
+    resave: true,
+    saveUninitialized: true,
+    secret: process.env.SESSION_SECRET,
+    store: new MongoStore({
+      url: process.env.MONGODB_URI,
+      autoReconnect: true
+    }),
+    cookie: {
+      secure: false,
+      maxAge: 365 * 24 * 60 * 60 * 1000
+    }
+  })
+);
 
 app.use(flash());
 app.use(passport.initialize());
-app.use(passport.session())
+app.use(passport.session());
 
-require('./lib/passport/passport')(passport)
+require("./lib/passport/passport")(passport);
 
-app.use(expressValidator({
-  errorFormatter: function(param, message, value) {
+// locals comes from node
+app.use(function(req, res, next) {
+  res.locals.user = req.user;
+  next();
+});
 
-      var namespace = param.split('.');
+app.use(
+  expressValidator({
+    errorFormatter: function(param, message, value) {
+      var namespace = param.split(".");
       var root = namespace.shift();
       var formParam = root;
 
       while (namespace.length) {
-          formParam += '[' + namespace.shift() + ']';
+        formParam += "[" + namespace.shift() + "]";
       }
 
       return {
-          param: formParam,
-          message: message,
-          value: value
-      }
-  }
-}))
+        param: formParam,
+        message: message,
+        value: value
+      };
+    }
+  })
+);
 
 app.use("/", indexRouter);
 app.use("/api/users", usersRouter);
 
-mongoose.connect(
-  process.env.MONGODB_URI,
-  { useNewUrlParser: true },
-  function(err) {
-    if (err) {
-      console.log(`Error: ${err}`);
-    } else {
-      console.log("mongodb connected");
-    }
+mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true }, function(
+  err
+) {
+  if (err) {
+    console.log(`Error: ${err}`);
+  } else {
+    console.log("mongodb connected");
   }
-);
+});
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -95,6 +105,5 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render("error");
 });
-
 
 module.exports = app;
