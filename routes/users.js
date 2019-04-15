@@ -27,6 +27,7 @@ router.get("/logout", function(req, res, next) {
   res.redirect("/");
 });
 
+// create a new user
 router.post(
   "/createuser",
   signupController.checkExistEmail,
@@ -34,6 +35,7 @@ router.post(
   signupController.createUser
 );
 
+// login using email and password with passport authentication
 router.post(
   "/loginbyEmail",
   passport.authenticate("local-login", {
@@ -43,11 +45,13 @@ router.post(
   })
 );
 
+// view the logged in user's profile with the option to update it
 router.get("/edit-profile", function(req, res, next) {
   res.render('profile', { errors: req.flash('errors'), success: req.flash('success')})
 });
 
-router.post("/profile-update", function(req, res, next) {
+// update user with a PUT requesting using method override
+router.put("/profile-update", function(req, res, next) {
   signupController
     .updateProfile(req.body, req.user._id)
     .then(user => {

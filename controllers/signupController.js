@@ -101,7 +101,7 @@ module.exports = {
           }
 
           if (params.address) {
-            user.profile.address = params.address;
+            user.address = params.address;
           }
 
           if (params.password) {
@@ -109,7 +109,7 @@ module.exports = {
           }
 
           if (params.email) {
-            user.profile.email = params.email;
+            user.email = params.email;
           }
 
           user

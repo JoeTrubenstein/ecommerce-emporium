@@ -44,7 +44,7 @@
       </div>
       <% } %>
     <div class="container emp-profile">
-      <form method="post" action="/api/users/profile-update">
+      
         <div class="row">
           <div class="col-md-4">
             <div class="profile-img">
@@ -183,7 +183,8 @@
                 role="tabpanel"
                 aria-labelledby="profile-tab"
               >
-              <!-- <form class="form-signin" method="POST" action="/api/users/profile-update"> -->
+           
+                <form method="post" action="/api/users/profile-update?_method=PUT">
 
                 <label for="inputName" class="sr-only">Name</label>
                 <input type="text" id="inputName" class="form-control" placeholder="Name" value="<%= user.profile.name %>" name="name">
