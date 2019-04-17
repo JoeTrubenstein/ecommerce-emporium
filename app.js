@@ -6,17 +6,19 @@ var logger = require("morgan");
 
 var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
+var adminRouter = require("./routes/admin/admin");
 
 var expressValidator = require("express-validator");
 var session = require("express-session");
 var flash = require("connect-flash");
 var passport = require("passport");
 
-var methodOverride = require('method-override')
+var methodOverride = require("method-override");
 
 var MongoStore = require("connect-mongo")(session);
 
 var mongoose = require("mongoose");
+mongoose.set('useCreateIndex', true);
 
 require("dotenv").config();
 var app = express();
@@ -31,7 +33,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
-app.use(methodOverride('_method'))
+app.use(methodOverride("_method"));
 
 app.use(
   session({
@@ -87,6 +89,7 @@ app.use(
 
 app.use("/", indexRouter);
 app.use("/api/users", usersRouter);
+app.use("/api/admin", adminRouter);
 
 mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true }, function(
   err

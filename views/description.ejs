@@ -37,31 +37,10 @@
 
     <div class="container">
       <div class="card-deck mb-3 text-center">
-        <% for(let i = 0; i < products.length; i++) { %>
-        <div class="card mb-4 shadow-sm">
-          <div class="card-header">
-            <h4 class="my-0 font-weight-normal">
-              <%= products[i].name%>
-            </h4>
-          </div>
-          <div class="card-body">
-            <ul class="list-unstyled mt-3 mb-4">
-              <img
-                src="<%= products[i].image %>"
-                style="width: 90%; max-height: 200px; object-fit: cover;"
-              />
-              <li>
-                <%= products[i].price%>
-              </li>
-            </ul>
-            <a href="/description/<%= products[i]._id %>"
-              ><button type="button" class="btn btn-lg btn-block btn-primary">
-                Buy
-              </button></a
-            >
-          </div>
-        </div>
-        <% } %>
+        <img style="margin: auto; "src="<%= description.image %>">
+        <h3>
+          <%= description.desc %>
+        </h3>
       </div>
       <% include ./partials/footer %>
     </div>

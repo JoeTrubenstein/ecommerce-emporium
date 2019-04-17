@@ -1,6 +1,32 @@
 var express = require("express");
 var router = express.Router();
 var signupController = require("../controllers/signupController");
+var Product = require('../models/Product')
+
+Product.createMapping(function(err, mapping){
+
+    if (err) {
+      console.log(err)
+    } else {
+      console.log(mapping)
+    }
+
+})
+
+var stream = Product.synchronize()
+var count = 0
+
+stream.on('data', function() {
+  count++;
+})
+
+stream.on('close', function() {
+  console.log('Indexed ' + count + 'documents')
+})
+
+stream.on('error', function(error) {
+  console.log(error)
+})
 
 //var loginByEmail = require('../utils/loginByEmail')
 var passport = require("passport");
