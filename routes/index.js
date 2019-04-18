@@ -3,8 +3,11 @@ var router = express.Router();
 var productController = require("../controllers/productController");
 var categoryController = require("../controllers/categoryController");
 
+var Product = require('../models/Product')
+
 /* GET home page. */
-router.get("/", categoryController.getCategoriesAndProduct)
+router.get("/", categoryController.getCategoriesAndProduct,
+)
 
 router.get("/description/:id", productController.getDescription);
 
@@ -23,5 +26,8 @@ router.post("/search", function(req, res, next) {
       res.status(error.status).json(error);
     });
 });
+
+// pagination
+router.get('/pagination/:page', categoryController.getCategoriesAndProduct)
 
 module.exports = router;
