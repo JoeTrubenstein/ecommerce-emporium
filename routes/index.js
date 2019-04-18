@@ -16,6 +16,19 @@ router.get("/", function(req, res, next) {
     });
 });
 
-router.get("/description/:id", productController.getDescription )
+router.get("/description/:id", productController.getDescription);
+
+router.post("/search", function(req, res, next) {
+  productController
+    .searchProductsPromise(req.body.search)
+    .then(results => {
+      res.json({
+        payload: results
+      });
+    })
+    .catch(error => {
+      res.status(error.status).json(error);
+    });
+});
 
 module.exports = router;

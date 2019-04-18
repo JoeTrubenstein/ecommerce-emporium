@@ -47,13 +47,11 @@ module.exports = {
 
   getDescription: (req, res, next) => {
     Product.findById(req.params.id, function(err, description) {
-    
       if (err) {
         res.json({
           payload: err
         });
       } else {
-    
         return res.render("description", {
           description
         });
@@ -73,6 +71,31 @@ module.exports = {
           errors.status = 500;
           reject(errors);
         });
+    });
+  },
+
+  searchProductsPromise: params => {
+    return new Promise((resolve, reject) => {
+      Product.search(
+        {
+          query_string: {
+            query: params
+          }
+        },
+        function(err, results) {
+          if (err) {
+            let errors = {};
+            errors.message = err;
+            errors.status = 500;
+            reject(errors);
+          } else {
+            let data = results.hits.hits.map(function(hit) {
+              return hit;
+            });
+            resolve(data);
+          }
+        }
+      );
     });
   }
 };
