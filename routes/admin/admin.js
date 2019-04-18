@@ -24,6 +24,26 @@ router.post(
   categoryController.addCategory
 );
 
+router.post(
+  "/add-category",
+  categoryValidation,
+  categoryController.addCategory
+);
+
+// displays only the products for a selected category
+router.post("/show-by-category", function(req, res, next) {
+  categoryController
+    .getProductsByCategory(req.body.categories)
+    .then(results => {
+      res.json({
+        payload: results
+      });
+    })
+    .catch(error => {
+      res.status(error.status).json(error);
+    });
+});
+
 router.get("/faker/:name/:id", productController.addFakeProduct);
 
 module.exports = router;

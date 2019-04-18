@@ -10,6 +10,7 @@
       </h5>
 
       <nav class="my-2 my-md-0 mr-md-3">
+        <a class="p-2 text-dark" href="/api/admin/categories">Categories</a>
         <% if(!user){ %>
         <a class="p-2 text-dark" href="/api/users/signup"
           >Sign up <span class="sr-only">(current)</span></a
@@ -30,34 +31,11 @@
         Joe's Express API
       </h1>
       <p class="lead">
-        Node / Express / Mongoose
+        Products By Category
       </p>
       <form method="POST" action="/search">
         <input type="text" name="search" placeholder="search" />
       </form>
-      <h5 class="nav-item dropdown">
-        <a
-          class="nav-link dropdown-toggle"
-          href="#"
-          id="navbarDropdown"
-          role="button"
-          data-toggle="dropdown"
-          aria-haspopup="true"
-          aria-expanded="false"
-        >
-          Categories
-        </a>
-
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <% for (let i = 0; i < categories.length; i++) { %>
-
-          <a class="dropdown-item" href="/products/<%= categories[i].id %>">
-            <%= categories[i].name %>
-          </a>
-
-          <% } %>
-        </div>
-      </h5>
     </div>
 
     <div class="container">

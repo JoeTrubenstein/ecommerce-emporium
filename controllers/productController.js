@@ -97,5 +97,20 @@ module.exports = {
         }
       );
     });
+  },
+
+  // show only products selected by the dropdown category
+  getProductsbyCategory: (req, res, next) => {
+    Product.find({ category: req.params.id }, function(err, products) {
+      if (err) {
+        res.json({
+          payload: err
+        });
+      } else {
+        return res.render("catIndex", {
+          products
+        });
+      }
+    });
   }
 };

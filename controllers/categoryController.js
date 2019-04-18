@@ -1,4 +1,5 @@
 const Category = require("../models/Category");
+const Product = require("../models/Product")
 
 module.exports = {
   addCategory: (req, res, next) => {
@@ -23,11 +24,34 @@ module.exports = {
           payload: err
         });
       } else {
-
         return res.render("categories", {
           categories,
-          errors: req.flash('errors'),
-          message: req.flash('success')
+          errors: req.flash("errors"),
+          message: req.flash("success")
+        });
+      }
+    });
+  },
+  getCategoriesAndProduct: (req, res, next) => {
+    Category.find({}, function(err, categories) {
+      if (err) {
+        res.json({
+          payload: err
+        });
+      } else {
+        Product.find({}, function(err, products) {
+          if (err) {
+            res.json({
+              payload: err
+            });
+          } else {
+            return res.render("index", {
+              products,
+              categories,
+              errors: req.flash("errors"),
+              message: req.flash("success")
+            });
+          }
         });
       }
     });
