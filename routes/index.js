@@ -1,18 +1,15 @@
 var express = require("express");
 var router = express.Router();
 var productController = require("../controllers/productController");
-var categoryController = require("../controllers/categoryController");
-
-var Product = require('../models/Product')
+var paginationController = require("../controllers/paginationController");
 
 /* GET home page. */
-router.get("/", categoryController.getCategoriesAndProduct,
-)
+router.get("/", paginationController.getCategoriesAndProduct);
 
 router.get("/description/:id", productController.getDescription);
 
 // get only selected category of products
-router.get("/products/:id", productController.getProductsbyCategory)
+router.get("/products/:id", productController.getProductsbyCategory);
 
 router.post("/search", function(req, res, next) {
   productController
@@ -28,6 +25,10 @@ router.post("/search", function(req, res, next) {
 });
 
 // pagination
-router.get('/pagination/:page', categoryController.getCategoriesAndProduct)
+router.get("/pagination/:page", paginationController.getCategoriesAndProduct);
+
+router.get("/checkout", function(req, res, next){
+  res.render("checkout")
+})
 
 module.exports = router;

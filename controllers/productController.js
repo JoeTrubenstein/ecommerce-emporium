@@ -2,33 +2,21 @@ const Product = require("../models/Product");
 
 var faker = require("faker");
 
-var randomName = faker.name.findName();
-var randomImg = faker.image.nightlife();
-var randomPrice = faker.finance.amount();
-var randomDesc = faker.lorem.paragraphs();
-
 module.exports = {
   addFakeProduct: (req, res, next) => {
-    let newProduct = new Product({
-      category: req.params.id,
-      name: randomName,
-      price: randomPrice,
-      image: randomImg,
-      desc: randomDesc
-    });
+    for (let i = 0; i < 5; i++) {
+      let newProduct = new Product({
+        category: req.params.id,
+        name: faker.commerce.productName(),
+        price: faker.finance.amount(),
+        image: faker.image.image(),
+        desc: faker.lorem.paragraphs()
+      });
 
-    newProduct.save(function(err) {
-      if (err) {
-        console.log(err);
-        console.log("20");
-        req.flash("errors", "something went wrong");
-        return res.redirect("/api/admin/categories");
-      } else {
-        console.log("22");
-        req.flash("success", "Fake Data Generated");
-        return res.redirect("/api/admin/categories");
-      }
-    });
+      newProduct.save();
+    }
+    req.flash("success", "Fake Data Generated");
+    res.redirect("/api/admin/categories");
   },
 
   getProducts: (req, res, next) => {

@@ -13,6 +13,7 @@ Product.createMapping(function(err, mapping){
 
 })
 
+// 
 var stream = Product.synchronize()
 var count = 0
 

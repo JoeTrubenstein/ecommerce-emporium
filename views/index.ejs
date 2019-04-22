@@ -47,6 +47,7 @@
         >
           Categories
         </a>
+        <nav class= "d-flex justify-content-center">
         <div class="lead">
             <% if (pages > 0) { %>
             <ul  class="pagination text-center">
@@ -71,6 +72,7 @@
               <% } %>
             </ul>
           </div>
+        </nav>
 
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
           <% for (let i = 0; i < categories.length; i++) { %>

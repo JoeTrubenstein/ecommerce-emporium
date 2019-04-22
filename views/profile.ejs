@@ -1,3 +1,12 @@
+<!-- 
+
+  Having issues with FADE class...
+
+  As it stands, items with FADE, won't show up at all.
+
+  Currently omitting FADE from elements.
+
+ -->
 <!DOCTYPE html>
 <html lang="en">
   <% include ./partials/head %>
@@ -118,7 +127,7 @@
             <div class="tab-content profile-tab" id="myTabContent">
 
                 <% if (errors.length > 0) { %>
-                  <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                  <div class="alert alert-danger alert-dismissible show" role="alert">
                         <%= errors %>
                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
@@ -127,7 +136,7 @@
                 <% } %>
 
                 <% if (success.length > 0) { %>
-                  <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                  <div class="alert alert-primary alert-dismissible show" role="alert">
                         <%= success %>
                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
@@ -136,7 +145,7 @@
                 <% } %>
 
               <div
-                class="tab-pane fade show active"
+                class="tab-pane show active"
                 id="home"
                 role="tabpanel"
                 aria-labelledby="home-tab"
@@ -178,7 +187,7 @@
                 </div>
               </div>
               <div
-                class="tab-pane fade"
+                class="tab-pane "
                 id="profile"
                 role="tabpanel"
                 aria-labelledby="profile-tab"

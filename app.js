@@ -11,11 +11,12 @@ var adminRouter = require("./routes/admin/admin");
 var expressValidator = require("express-validator");
 var session = require("express-session");
 var flash = require("connect-flash");
-var passport = require("passport");
+var passport = require("passport"); 
 
 var methodOverride = require("method-override");
 
 var MongoStore = require("connect-mongo")(session);
+
 
 var mongoose = require("mongoose");
 mongoose.set('useCreateIndex', true);
