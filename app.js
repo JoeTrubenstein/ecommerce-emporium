@@ -17,6 +17,8 @@ var methodOverride = require("method-override");
 
 var MongoStore = require("connect-mongo")(session);
 
+var cartMiddleware = require('./utils/cartMiddleware')
+
 
 var mongoose = require("mongoose");
 mongoose.set('useCreateIndex', true);
@@ -35,6 +37,8 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
 app.use(methodOverride("_method"));
+
+
 
 app.use(
   session({
@@ -67,6 +71,8 @@ app.use(function(req, res, next) {
 
   next();
 });
+
+app.use(cartMiddleware)
 
 app.use(
   expressValidator({

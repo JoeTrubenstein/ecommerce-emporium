@@ -100,5 +100,39 @@ module.exports = {
         });
       }
     });
+  },
+
+  addToCart: (params, id) => {
+    return new Promise((resolve, reject) => {
+      Cart.findOne({ _id: id })
+
+        .then(cart => {
+          if (params.product) {    
+            cart.items += {
+              item : params.id,
+              quantity: + 1,
+              price: params.price
+            } 
+          }
+
+          cart
+            .save()
+            .then(cart => {
+              resolve(cart);
+            })
+            .catch(error => {
+              let errors = [];
+              errors.message = error;
+              errors.status = 400;
+              reject(errors);
+            });
+        })
+        .catch(error => {
+          let errors = [];
+          errors.message = error;
+          errors.status = 400;
+          reject(errors);
+        });
+    });
   }
 };

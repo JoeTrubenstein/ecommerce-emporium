@@ -1,4 +1,5 @@
 const User = require("../models/User");
+const Cart = require("../models/Cart");
 const bcrypt = require("bcrypt");
 const getGravatar = require("../utils/gravatar");
 
@@ -77,11 +78,16 @@ module.exports = {
             } else {
               req.logIn(user, function(err) {
                 if (err) {
+                  console.log(err);
                   res.status(400).json({
-                    confirmation: false,
+                    confirmation: "error creating user",
                     message: err
                   });
                 } else {
+                  let cart = new Cart({
+                    owner: user._id
+                  });
+                  cart.save();
                   res.redirect("/");
                 }
               });

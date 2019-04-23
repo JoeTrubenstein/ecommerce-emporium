@@ -27,8 +27,8 @@ router.post("/search", function(req, res, next) {
 // pagination
 router.get("/pagination/:page", paginationController.getCategoriesAndProduct);
 
-router.get("/checkout", function(req, res, next){
-  res.render("checkout")
+router.get("/cart", function(req, res, next){
+  res.render("cart")
 })
 
 module.exports = router;
