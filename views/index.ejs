@@ -21,14 +21,15 @@
           >loggedIn as <%= user.profile.name %></a
         >
         <a class="p-2 text-dark" href="/api/users/logout">Logout</a>
-       
-          <a class="p-2 text-dark" href="/api/cart">
-            <span class="fa-stack  has-badge" data-count="<%= cart %>">
-              <i class="fas fa-shopping-cart"></i>
-              <%= cart %>
-            </span>
-          </a>
-      
+
+        <a class="p-2 text-dark" href="/api/cart">
+          <span class="fa-stack  has-badge" data-count="<%= cart %>">
+            <i class="fas fa-shopping-cart"></i>
+          </span>
+          <small>
+            <%= cart %>
+          </small>
+        </a>
 
         <% } %>
       </nav>
@@ -55,19 +56,19 @@
         >
           Categories
         </a>
-        <nav class= "d-flex justify-content-center">
-        <div class="lead">
+        <nav class="d-flex justify-content-center">
+          <div class="lead">
             <% if (pages > 0) { %>
-            <ul  class="pagination text-center">
+            <ul class="pagination text-center">
               <% if (current == 1) { %>
               <li class="disabled"><a>First</a></li>
               <% } else { %>
               <li><a href="/pagination/1">First</a></li>
-              <% } %> <% var i = (Number(current) > 5 ? Number(current) - 4 : 1) %> <%
-              if (i !== 1) { %>
+              <% } %> <% var i = (Number(current) > 5 ? Number(current) - 4 : 1)
+              %> <% if (i !== 1) { %>
               <li class="disabled"><a>...</a></li>
-              <% } %> <% for (; i <= (Number(current) + 4) && i <= pages; i++) { %> <%
-              if (i == current) { %>
+              <% } %> <% for (; i <= (Number(current) + 4) && i <= pages; i++) {
+              %> <% if (i == current) { %>
               <li class="active"><a><%= i %></a></li>
               <% } else { %>
               <li><a href="/pagination/<%= i %>"><%= i %></a></li>

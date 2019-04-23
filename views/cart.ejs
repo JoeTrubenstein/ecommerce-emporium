@@ -1,6 +1,250 @@
 <!DOCTYPE html>
 <html lang="en">
-  <% include ./partials/head %>
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta name="description" content="" />
+    <meta
+      name="author"
+      content="Mark Otto, Jacob Thornton, and Bootstrap contributors"
+    />
+    <meta name="generator" content="Jekyll v3.8.5" />
+    <title>Pricing example · Bootstrap</title>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+    />
+
+    <link
+      rel="canonical"
+      href="https://getbootstrap.com/docs/4.3/examples/pricing/"
+    />
+
+    <!-- Bootstrap core CSS -->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+      integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+      integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+      crossorigin="anonymous"
+    ></script>
+    <script src="/javascripts/addAndSubtract.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+      integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf"
+      crossorigin="anonymous"
+    />
+
+    <style>
+      .emp-profile {
+        padding: 3%;
+        margin-top: 3%;
+        margin-bottom: 3%;
+        border-radius: 0.5rem;
+        background: #fff;
+      }
+      .profile-img {
+        text-align: center;
+      }
+      .profile-img img {
+        width: 70%;
+        height: 100%;
+      }
+      .profile-img .file {
+        position: relative;
+        overflow: hidden;
+        margin-top: -20%;
+        width: 70%;
+        border: none;
+        border-radius: 0;
+        font-size: 15px;
+        background: #212529b8;
+      }
+      .profile-img .file input {
+        position: absolute;
+        opacity: 0;
+        right: 0;
+        top: 0;
+      }
+      .profile-head h5 {
+        color: #333;
+      }
+      .profile-head h6 {
+        color: #0062cc;
+      }
+      .profile-edit-btn {
+        border: none;
+        border-radius: 1.5rem;
+        width: 70%;
+        padding: 2%;
+        font-weight: 600;
+        color: #6c757d;
+        cursor: pointer;
+      }
+      .proile-rating {
+        font-size: 12px;
+        color: #818182;
+        margin-top: 5%;
+      }
+      .proile-rating span {
+        color: #495057;
+        font-size: 15px;
+        font-weight: 600;
+      }
+      .profile-head .nav-tabs {
+        margin-bottom: 5%;
+      }
+      .profile-head .nav-tabs .nav-link {
+        font-weight: 600;
+        border: none;
+      }
+      .profile-head .nav-tabs .nav-link.active {
+        border: none;
+        border-bottom: 2px solid #0062cc;
+      }
+      .profile-work {
+        padding: 14%;
+        margin-top: -15%;
+      }
+      .profile-work p {
+        font-size: 12px;
+        color: #818182;
+        font-weight: 600;
+        margin-top: 10%;
+      }
+      .profile-work a {
+        text-decoration: none;
+        color: #495057;
+        font-weight: 600;
+        font-size: 14px;
+      }
+      .profile-work ul {
+        list-style: none;
+      }
+      .profile-tab label {
+        font-weight: 600;
+      }
+      .profile-tab p {
+        font-weight: 600;
+        color: #0062cc;
+      }
+
+      /* Smartphones (landscape) ----------- */
+      @media only screen and (min-width: 321px) {
+        /* Styles */
+      }
+
+      /* Smartphones (portrait) ----------- */
+      @media only screen and (max-width: 320px) {
+        /* Styles */
+      }
+      html {
+        font-size: 14px;
+      }
+      @media (min-width: 768px) {
+        html {
+          font-size: 16px;
+        }
+      }
+
+      .container {
+        max-width: 960px;
+      }
+
+      .pricing-header {
+        max-width: 700px;
+      }
+
+      .card-deck .card {
+        min-width: 220px;
+      }
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+    </style>
+    <!-- Custom styles for this template -->
+    <link href="pricing.css" rel="stylesheet" />
+
+    <style>
+      .table > tbody > tr > td,
+      .table > tfoot > tr > td {
+        vertical-align: middle;
+      }
+      @media screen and (max-width: 600px) {
+        table#cart tbody td .form-control {
+          width: 20%;
+          display: inline !important;
+        }
+        .actions .btn {
+          width: 36%;
+          margin: 1.5em 0;
+        }
+
+        .actions .btn-info {
+          float: left;
+        }
+        .actions .btn-danger {
+          float: right;
+        }
+
+        table#cart thead {
+          display: none;
+        }
+        table#cart tbody td {
+          display: block;
+          padding: 0.6rem;
+          min-width: 320px;
+        }
+        table#cart tbody tr td:first-child {
+          background: #333;
+          color: #fff;
+        }
+        table#cart tbody td:before {
+          content: attr(data-th);
+          font-weight: bold;
+          display: inline-block;
+          width: 8rem;
+        }
+
+        table#cart tfoot td {
+          display: block;
+        }
+        table#cart tfoot td .btn {
+          display: block;
+        }
+      }
+    </style>
+  </head>
   <body>
     <div
       class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm"
@@ -10,7 +254,6 @@
       </h5>
 
       <nav class="my-2 my-md-0 mr-md-3">
-        <a class="p-2 text-dark" href="/api/admin/categories">Categories</a>
         <% if(!user){ %>
         <a class="p-2 text-dark" href="/api/users/signup"
           >Sign up <span class="sr-only">(current)</span></a
@@ -22,6 +265,12 @@
           >loggedIn as <%= user.profile.name %></a
         >
         <a class="p-2 text-dark" href="/api/users/logout">Logout</a>
+        <a class="p-2 text-dark" href="/api/cart">
+          <span class="fa-stack  has-badge" data-count="<%= cart %>">
+            <i class="fas fa-shopping-cart"></i>
+          </span>
+          <small><%= cart %></small>
+        </a>
 
         <% } %>
       </nav>
@@ -33,62 +282,100 @@
       <p class="lead">
         Node / Express / Mongoose
       </p>
-      
-     
-
-  <!-- Modal -->
-
-
-  <!-- /////////////// -->
-
-  
     </div>
 
     <div class="container">
+
       <div class="card-deck mb-3 text-center">
-
         <script src="https://js.stripe.com/v3"></script>
+        <div class="card mb-4 shadow-sm">
+          <link
+            href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css"
+            rel="stylesheet"
+          />
+          <div class="container">
+            <table id="cart" class="table table-hover table-condensed">
+              <thead>
+                <tr>
+                  <th style="width:50%">Product</th>
+                  <th style="width:10%">Price</th>
+                  <th style="width:8%">Quantity</th>
+                  <th style="width:22%" class="text-center">Subtotal</th>
+                  <th style="width:10%"></th>
+                </tr>
+              </thead>
+              <tbody>
+                <% for(let i = 0; i < myCart.items.length; i++) { %>
+                <form method="POST" action="/api/cart/remove?_method=DELETE">
+                  <input type="hidden" name="id" value="<%= myCart.items[i]._id %>"/>
+                  <input type="hidden" name="price" value="<%= myCart.items[i].item.price %>"/>
 
-        <!-- Create a button that your customers click to complete their purchase. Customize the styling to suit your branding. -->
-        <button
-          style=" margin: auto; background-color:#6772E5;color:#FFF;padding:8px 12px;border:0;border-radius:4px;font-size:1em"
-          id="checkout-button-sku_EvyP1gx61VfRtu"
-          role="link"
-        >
-          Checkout
-        </button>
 
-        <div id="error-message"></div>
+                  <tr>
+                    <td data-th="Product">
+                      <div class="row">
+                        <div class="col-sm-2 hidden-xs">
+                          <img
+                            src="<%= myCart.items[i].item.image %>"
+                            alt="..."
+                            class="img-responsive"
+                          />
+                        </div>
+                        <div class="col-sm-10">
+                          <h4 class="nomargin"></h4>
+                          <p>
+                            <%= myCart.items[i].item.name %>
+                          </p>
+                        </div>
+                      </div>
+                    </td>
+                    <td data-th="Price"><%= myCart.items[i].item.price %></td>
+                    <td data-th="Quantity">
+                      <div>
+                        <%= myCart.items[i].quantity %>
+                      </div>
+                    </td>
+                    <td data-th="Subtotal" class="text-center">
+                      <%= myCart.items[i].price %>
+                    </td>
+                    <td class="actions" data-th="">
+                      <button class="btn btn-danger btn-sm">
+                        <i class="fa fa-trash-o"></i>
+                      </button>
+                    </td>
+                  </tr>
+                </form>
 
-        <script>
-          var stripe = Stripe("pk_test_03F7e80rOI6gnP0tS7zk9TTh00izWUD6Ls");
+                <% } %>
+              </tbody>
+              <tfoot>
+                <tr class="visible-xs">
+                  <td class="text-center"><strong>Total</strong></td>
+                </tr>
+                <tr>
+                  <td>
+                    <a href="#" class="btn btn-warning"
+                      ><i class="fa fa-angle-left"></i> Continue Shopping</a
+                    >
+                  </td>
+                  <td colspan="2" class="hidden-xs"></td>
+                  <td class="hidden-xs text-center">
+                    <strong>Total <%= myCart.total %></strong>
+                  </td>
+                  <td>
+                    <a href="#" class="btn btn-success btn-block"
+                      >Checkout <i class="fa fa-angle-right"></i
+                    ></a>
+                  </td>
+                </tr>
+              </tfoot>
+            </table>
+          </div>
 
-          var checkoutButton = document.getElementById(
-            "checkout-button-sku_EvyP1gx61VfRtu"
-          );
-          checkoutButton.addEventListener("click", function() {
-            // When the customer clicks on the button, redirect
-            // them to Checkout.
-            stripe
-              .redirectToCheckout({
-                items: [{ sku: "sku_EvyP1gx61VfRtu", quantity: 1 }],
+          <div id="error-message"></div>
+        </div>
 
-                // Note that it is not guaranteed your customers will be redirected to this
-                // URL *100%* of the time, it's possible that they could e.g. close the
-                // tab between form submission and the redirect.
-                successUrl: "https://your-website.com/success",
-                cancelUrl: "https://your-website.com/canceled"
-              })
-              .then(function(result) {
-                if (result.error) {
-                  // If `redirectToCheckout` fails due to a browser or network
-                  // error, display the localized error message to your customer.
-                  var displayError = document.getElementById("error-message");
-                  displayError.textContent = result.error.message;
-                }
-              });
-          });
-        </script>
+  
       </div>
       <% include ./partials/footer %>
     </div>

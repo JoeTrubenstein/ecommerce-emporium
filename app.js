@@ -6,6 +6,7 @@ var logger = require("morgan");
 
 var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
+var cartRouter = require("./routes/cart");
 var adminRouter = require("./routes/admin/admin");
 
 var expressValidator = require("express-validator");
@@ -97,6 +98,7 @@ app.use(
 app.use("/", indexRouter);
 app.use("/api/users", usersRouter);
 app.use("/api/admin", adminRouter);
+app.use("/api/cart", cartRouter);
 
 mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true }, function(
   err

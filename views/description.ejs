@@ -22,6 +22,13 @@
           >loggedIn as <%= user.profile.name %></a
         >
         <a class="p-2 text-dark" href="/api/users/logout">Logout</a>
+        <a class="p-2 text-dark" href="/api/cart">
+          <span class="fa-stack  has-badge" data-count="<%= cart %>">
+            <i class="fas fa-shopping-cart"></i>
+            
+          </span>
+          <small><%= cart %></small>
+        </a>
 
         <% } %>
       </nav>
@@ -51,7 +58,9 @@
 
           <div class="form-group">
             <input type="hidden" name="product_id" id="quantity" value="<%= description._id %>"></input>
+            <input type="hidden" name="user" id="user" value="<%= user %>"></input>
             <input type="hidden" name="priceHidden" id="priceHidden" value="<%= description.price %>"></input>
+            <input type="hidden" name="cart" id="cart" value="<%= cart %>"></input>
 
             <input type="text" name="item" class="form-control" value="<%= description.name %>"></input>
             <input type="text" name="priceValue" id="priceValue" class="form-control" value="<%= description.price %>"></input>

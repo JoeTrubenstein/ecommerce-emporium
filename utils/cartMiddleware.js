@@ -22,5 +22,7 @@ module.exports = (req, res, next) => {
             errors : error
         })
     });
+  } else {
+    next();
   }
 };
