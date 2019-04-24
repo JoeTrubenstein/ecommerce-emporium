@@ -53,6 +53,8 @@
       integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf"
       crossorigin="anonymous"
     />
+    <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
+    <script src="/javascripts/stripe.js" crossorigin="anonymous"></script>
 
     <style>
       .emp-profile {
@@ -193,8 +195,6 @@
       }
     </style>
     <!-- Custom styles for this template -->
-    <link href="pricing.css" rel="stylesheet" />
-
     <style>
       .table > tbody > tr > td,
       .table > tfoot > tr > td {
@@ -250,7 +250,7 @@
       class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm"
     >
       <h5 class="my-0 mr-md-auto font-weight-normal">
-        <a href="/">Joe's API</a>
+        <a href="/">Home</a>
       </h5>
 
       <nav class="my-2 my-md-0 mr-md-3">
@@ -277,7 +277,7 @@
     </div>
     <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
       <h1 class="display-4">
-        Joe's Express API
+          <small>Joe's </small>E-commerce Emporium
       </h1>
       <p class="lead">
         Node / Express / Mongoose
@@ -285,7 +285,6 @@
     </div>
 
     <div class="container">
-
       <div class="card-deck mb-3 text-center">
         <script src="https://js.stripe.com/v3"></script>
         <div class="card mb-4 shadow-sm">
@@ -307,9 +306,16 @@
               <tbody>
                 <% for(let i = 0; i < myCart.items.length; i++) { %>
                 <form method="POST" action="/api/cart/remove?_method=DELETE">
-                  <input type="hidden" name="id" value="<%= myCart.items[i]._id %>"/>
-                  <input type="hidden" name="price" value="<%= myCart.items[i].item.price %>"/>
-
+                  <input
+                    type="hidden"
+                    name="id"
+                    value="<%= myCart.items[i]._id %>"
+                  />
+                  <input
+                    type="hidden"
+                    name="price"
+                    value="<%= myCart.items[i].item.price %>"
+                  />
 
                   <tr>
                     <td data-th="Product">
@@ -362,20 +368,159 @@
                   <td class="hidden-xs text-center">
                     <strong>Total <%= myCart.total %></strong>
                   </td>
+
                   <td>
-                    <a href="#" class="btn btn-success btn-block"
-                      >Checkout <i class="fa fa-angle-right"></i
+                    <a href="#"
+                      ><i
+                        class="far fa-credit-card fa-3x"
+                        data-toggle="modal"
+                        data-target="#exampleModal"
+                      ></i
                     ></a>
                   </td>
                 </tr>
               </tfoot>
             </table>
+            <div
+              class="modal "
+              id="exampleModal"
+              tabindex="-1"
+              role="dialog"
+              aria-labelledby="exampleModalLabel"
+              aria-hidden="true"
+            >
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">
+                      Stripe Payment
+                    </h5>
+                    <button
+                      type="button"
+                      class="close"
+                      data-dismiss="modal"
+                      aria-label="Close"
+                    >
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <div class="container">
+                      <div class="row">
+                        <div class="col">
+                          <div class="panel panel-default credit-card-box">
+                            <div class="panel-heading display-table">
+                              <div class="row display-tr">
+                                <h3 class="panel-title display-td">
+                                  Payment Details
+                                </h3>
+                                <div class="display-td">
+                                  <img
+                                    class="img-responsive pull-right"
+                                    src="http://i76.imgup.net/accepted_c22e0.png"
+                                  />
+                                </div>
+                              </div>
+                            </div>
+                            <div class="panel-body">
+                              <form
+                                role="form"
+                                id="payment-form"
+                                method="POST"
+                                action="/api/cart/payment"
+                              >
+                                <input
+                                  type="hidden"
+                                  name="stripeMoney"
+                                  value="<%= myCart.total %>"
+                                />
+                                <div class="row">
+                                  <div class="col">
+                                    <div class="form-group">
+                                      <label for="cardNumber"
+                                        >CARD NUMBER</label
+                                      >
+                                      <div class="input-group">
+          
+                                        <input
+                                          type="tel"
+                                          class="form-control"
+                                          name="cardNumber"
+                                          placeholder="Valid Card Number"
+                                          autocomplete="cc-number"
+                                          id="card-number"
+                                        />
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="row">
+                                  <div class="col">
+                                    <div class="form-group">
+                                      <label for="cardExpiry"
+                                        ><span class="hidden-xs"
+                                          >EXPIRATION</span
+                                        ><span class="visible-xs-inline"
+                                          >EXP</span
+                                        >
+                                        DATE</label
+                                      >
+                                      <input
+                                        type="tel"
+                                        class="form-control"
+                                        name="cardExpiry"
+                                        placeholder="MM / YY"
+                                        autocomplete="cc-exp"
+                                        id="card-expiry-month-year"
+                                      />
+                                    </div>
+                                  </div>
+                                  <div class="col pull-right">
+                                    <div class="form-group">
+                                      <label for="cardCVC">CV CODE</label>
+                                      <input
+                                        type="tel"
+                                        class="form-control"
+                                        name="cardCVC"
+                                        placeholder="CVC"
+                                        autocomplete="cc-csc"
+                                        id="card-cvc"
+                                      />
+                                    </div>
+                                  </div>
+                                </div>
+
+                                <div class="row">
+                                  <div class="col">
+                                    <button
+                                      class="btn btn-success btn-lg btn-block"
+                                      type="submit"
+                                      
+                                    >
+                                      Pay: $(<%= myCart.total %>)
+                                    </button>
+                                  </div>
+                                </div>
+                                <div class="row" style="display:none;">
+                                  <div class="col">
+                                    <p class="payment-errors"></p>
+                                  </div>
+                                </div>
+                              </form>
+                            </div>
+                          </div>
+                          <!-- CREDIT CARD FORM ENDS HERE -->
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
 
           <div id="error-message"></div>
         </div>
-
-  
       </div>
       <% include ./partials/footer %>
     </div>

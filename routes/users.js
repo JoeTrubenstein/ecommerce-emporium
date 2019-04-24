@@ -3,6 +3,8 @@ var router = express.Router();
 var signupController = require("../controllers/signupController");
 var Product = require('../models/Product')
 
+var viewHistory = require("../utils/viewHistory")
+
 Product.createMapping(function(err, mapping){
 
     if (err) {
@@ -90,5 +92,9 @@ router.put("/profile-update", function(req, res, next) {
       return res.redirect("/api/users/edit-profile");
     });
 });
+
+
+// get order history
+router.get("/history", viewHistory)
 
 module.exports = router;
