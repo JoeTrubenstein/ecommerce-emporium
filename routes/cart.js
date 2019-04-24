@@ -3,8 +3,10 @@ var router = express.Router();
 var addToCart = require("../utils/addToCart");
 var viewCart = require("../utils/viewCart");
 var removeFromCart = require("../utils/removeFromCart");
+
 //var stripe = require("stripe")(process.env.SECRET)
-var stripe = require("stripe")("sk_test_hHi0eKfOlEoov2ZAqy3xWzmF00MIOcxSvy");
+
+
 var Cart = require("../models/Cart");
 var User = require("../models/User");
 
