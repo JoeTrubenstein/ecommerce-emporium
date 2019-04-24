@@ -3,14 +3,10 @@ var router = express.Router();
 var addToCart = require("../utils/addToCart");
 var viewCart = require("../utils/viewCart");
 var removeFromCart = require("../utils/removeFromCart");
-
-//var stripe = require("stripe")(process.env.SECRET)
-
-
 var Cart = require("../models/Cart");
 var User = require("../models/User");
 
-var waterfall = require('async-waterfall');
+var waterfall = require("async-waterfall");
 
 // add item to cart from the product page
 router.post("/product/:id", addToCart);
@@ -23,6 +19,7 @@ router.delete("/remove", removeFromCart);
 
 // submit a payment
 router.post("/payment", function(req, res, next) {
+  var stripe = require("stripe")(process.env.SECRET);
 
   let stripeToken = req.body.stripeToken;
   let currentCharges = req.body.stripeMoney * 100;
@@ -72,7 +69,7 @@ router.post("/payment", function(req, res, next) {
             { $set: { items: [], total: 0 } },
             function(err, updated) {
               if (updated) {
-                res.redirect("/")
+                res.redirect("/");
               }
             }
           );
@@ -80,7 +77,6 @@ router.post("/payment", function(req, res, next) {
       ]);
     })
     .catch(error => {
-      console.log(error)
       let errors = {};
       errors.message = error;
       errors.status = 400;

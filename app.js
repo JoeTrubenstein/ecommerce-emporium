@@ -25,6 +25,7 @@ var mongoose = require("mongoose");
 mongoose.set('useCreateIndex', true);
 
 require("dotenv").config();
+
 var app = express();
 
 // view engine setup
