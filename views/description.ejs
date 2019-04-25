@@ -23,13 +23,14 @@
         >
         <a class="p-2 text-dark" href="/api/users/logout">Logout</a>
         <a class="p-2 text-dark" href="/api/cart">
+          <% if (user) { %>
           <span class="fa-stack  has-badge" data-count="<%= cart %>">
             <i class="fas fa-shopping-cart"></i>
             
           </span>
           <small><%= cart %></small>
         </a>
-
+        <% } %>
         <% } %>
       </nav>
     </div>
@@ -48,6 +49,7 @@
         <h3>
           <%= description.desc %>
         </h3>
+        <% if (user) { %>
         <form style=" margin: auto; "method="POST" action="/api/cart/product/<%= description._id %>">
           <div class="btn-group" role="group" aria-label="...">
             <input type="hidden" name="quantity" id="quantity" value="1"></input>
@@ -55,6 +57,9 @@
             <button type="button" id="total" class="btn btn-default">1</button>
             <button type="button" id="plus" class="btn btn-default"><i class="fas fa-plus"></i></button>
           </div>
+
+          <% } %>
+          <% if (user) { %>
 
           <div class="form-group">
             <input type="hidden" name="product_id" id="quantity" value="<%= description._id %>"></input>
@@ -65,11 +70,12 @@
             <input type="text" name="item" class="form-control" value="<%= description.name %>"></input>
             <input type="text" name="priceValue" id="priceValue" class="form-control" value="<%= description.price %>"></input>
           </div>
+          <% }%>
 
           <% if (user)  { %>
             <button type="submit" class="btn btn-primary btn-lg">Add to Cart</button>
           <% } else { %>
-            <a href='/signup' class="btn btn-warning btn-lg">Signup to begin buying!</a>
+            <a style= "margin: auto;" href='/api/users/signup' class="btn btn-warning btn-lg">Sign up to begin buying!</a>
           <% } %>
         </form>
       </div>

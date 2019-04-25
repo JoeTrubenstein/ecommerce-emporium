@@ -1,6 +1,8 @@
 let mongoose = require("mongoose");
 var mongoosastic = require("mongoosastic");
 
+let elasticSearchENV = process.env.BONSAI_URL || 'localhost:9200'
+
 var ProductSchema = new mongoose.Schema({
   category: {
     type: mongoose.Schema.Types.ObjectId,
@@ -15,7 +17,7 @@ var ProductSchema = new mongoose.Schema({
 
 ProductSchema.plugin(mongoosastic, {
   hosts: [
-      "localhost:9200"
+      elasticSearchENV
     ]
 });
 
