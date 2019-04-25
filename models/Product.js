@@ -7,7 +7,8 @@ var ProductSchema = new mongoose.Schema({
   category: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "category",
-    es_type: 'text'
+    es_type: 'nested',
+    es_include_in_parent: true
   },
   name: { type: String, es_type: 'text', default: "" },
   price: { type: Number, es_type: 'long', default: 0 },
@@ -18,6 +19,10 @@ var ProductSchema = new mongoose.Schema({
 ProductSchema.plugin(mongoosastic, {
   hosts: [
       elasticSearchENV
+    ], populate: [
+      {
+        path: 'category'
+      }
     ]
 });
 
