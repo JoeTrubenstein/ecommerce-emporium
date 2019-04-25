@@ -14,6 +14,7 @@ module.exports = {
         Product.find({})
           .skip(perPage * page - perPage)
           .limit(perPage)
+          .populate('category')
           .exec(function(err, products) {
             Product.count().exec(function(err, count) {
               if (err) return next(err);

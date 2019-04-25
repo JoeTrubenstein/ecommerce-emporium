@@ -111,6 +111,9 @@
                 style="width: 90%; max-height: 200px; object-fit: cover;"
               />
               <li>
+                Category: <a href="/products/<%= products[i].category._id %>"> <%= products[i].category.name %></a> 
+              </li>
+              <li>
                 <%= products[i].price%>
               </li>
             </ul>
