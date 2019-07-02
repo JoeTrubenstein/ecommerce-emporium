@@ -10,7 +10,7 @@
       </h5>
 
       <nav class="my-2 my-md-0 mr-md-3">
-        <a class="p-2 text-dark" href="/api/admin/categories">Categories</a>
+        <!-- <a class="p-2 text-dark" href="/api/admin/categories">Categories</a> -->
         <% if(!user){ %>
         <a class="p-2 text-dark" href="/api/users/signup"
           >Sign up <span class="sr-only">(current)</span></a
@@ -26,60 +26,103 @@
           <% if (user) { %>
           <span class="fa-stack  has-badge" data-count="<%= cart %>">
             <i class="fas fa-shopping-cart"></i>
-            
           </span>
           <small><%= cart %></small>
         </a>
-        <% } %>
-        <% } %>
+        <% } %> <% } %>
       </nav>
-    </div>
-    <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
-      <h1 class="display-4">
-          <small>Joe's </small>E-commerce Emporium
-      </h1>
-      <p class="lead">
-        Node / Express / Mongoose
-      </p>
     </div>
 
     <div class="container">
       <div class="card-deck mb-3 text-center">
-        <img style="margin: auto; "src="<%= description.image %>">
-        <h3>
-          <%= description.desc %>
-        </h3>
-        <% if (user) { %>
-        <form style=" margin: auto; "method="POST" action="/api/cart/product/<%= description._id %>">
-          <div class="btn-group" role="group" aria-label="...">
-            <input type="hidden" name="quantity" id="quantity" value="1"></input>
-            <button type="button" id="minus" class="btn btn-default"><i class="fas fa-minus"></i></button>
-            <button type="button" id="total" class="btn btn-default">1</button>
-            <button type="button" id="plus" class="btn btn-default"><i class="fas fa-plus"></i></button>
+        <div class="card">
+          <img src="<%= description.image %>" />
+          <div class="card-body">
+            <h5 class="card-title"><%= description.name %></h5>
+            <p class="card-text">
+              <%= description.desc %>
+            </p>
+            <% if (user) { %> <% if (user) { %>
+            <form
+              style=" margin: auto; "
+              method="POST"
+              action="/api/cart/product/<%= description._id %>"
+            >
+              <div class="btn-group" role="group" aria-label="...">
+                <input type="hidden" name="quantity" id="quantity" value="1" />
+                <button type="button" id="minus" class="btn btn-default">
+                  <i class="fas fa-minus"></i>
+                </button>
+                <button type="button" id="total" class="btn btn-default">
+                  1
+                </button>
+                <button type="button" id="plus" class="btn btn-default">
+                  <i class="fas fa-plus"></i>
+                </button>
+              </div>
+
+              <% } %> <% if (user) { %>
+
+              <div class="form-group">
+                <input
+                  type="hidden"
+                  name="product_id"
+                  id="quantity"
+                  value="<%= description._id %>"
+                />
+                <input
+                  type="hidden"
+                  name="user"
+                  id="user"
+                  value="<%= user %>"
+                />
+                <input
+                  type="hidden"
+                  name="priceHidden"
+                  id="priceHidden"
+                  value="<%= description.price %>"
+                />
+                <input
+                  type="hidden"
+                  name="cart"
+                  id="cart"
+                  value="<%= cart %>"
+                />
+
+                <input
+                  type="hidden"
+                  name="item"
+                  class="form-control"
+                  value="<%= description.name %>"
+                />
+                <input
+                  style="text-align: center;"
+                  type="text"
+                  name="priceValue"
+                  id="priceValue"
+                  class="form-control"
+                  value="<%= description.price %>"
+                />
+                <br />
+                <button type="submit" class="btn btn-primary btn-lg">
+                  Add to Cart
+                </button>
+              </div>
+              <% }%>
+            </form>
+            <% } else { %>
+            <a
+              style="margin: auto;"
+              href="/api/users/signup"
+              class="btn btn-warning btn-lg"
+              >Sign up to begin buying!</a
+            >
+            <% } %>
           </div>
-
-          <% } %>
-          <% if (user) { %>
-
-          <div class="form-group">
-            <input type="hidden" name="product_id" id="quantity" value="<%= description._id %>"></input>
-            <input type="hidden" name="user" id="user" value="<%= user %>"></input>
-            <input type="hidden" name="priceHidden" id="priceHidden" value="<%= description.price %>"></input>
-            <input type="hidden" name="cart" id="cart" value="<%= cart %>"></input>
-
-            <input type="text" name="item" class="form-control" value="<%= description.name %>"></input>
-            <input type="text" name="priceValue" id="priceValue" class="form-control" value="<%= description.price %>"></input>
-          </div>
-          <% }%>
-
-          <% if (user)  { %>
-            <button type="submit" class="btn btn-primary btn-lg">Add to Cart</button>
-          <% } else { %>
-            <a style= "margin: auto;" href='/api/users/signup' class="btn btn-warning btn-lg">Sign up to begin buying!</a>
-          <% } %>
-        </form>
+        </div>
+        <h3></h3>
       </div>
-      <% include ./partials/footer %>
     </div>
+    <% include ./partials/footer %>
   </body>
 </html>

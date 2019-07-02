@@ -6,11 +6,7 @@
 
   <nav class="my-2 my-md-0 mr-md-3">
     <% if(!user){ %>
-    <a class="p-2 text-dark" href="/api/users/signup"
-      >Sign up <span class="sr-only">(current)</span></a
-    >
-
-    <a class="p-2 text-dark" href="/api/users/signup">Sign in</a>
+    <a class="p-2 text-dark" href="/api/users/signup">Users</a>
     <% } else { %>
     <a class="p-2 text-dark" href="/api/users/edit-profile"
       >loggedIn as <%= user.profile.name %></a

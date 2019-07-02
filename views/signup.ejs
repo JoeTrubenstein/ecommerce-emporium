@@ -12,21 +12,18 @@
         Node / Express / Mongoose
       </p>
       <% if (errors.length > 0) { %>
-        <div
-          class="alert alert-danger alert-dismissible show"
-          role="alert"
+      <div class="alert alert-danger alert-dismissible show" role="alert">
+        <%= errors %>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="alert"
+          aria-label="Close"
         >
-          <%= errors %>
-          <button
-            type="button"
-            class="close"
-            data-dismiss="alert"
-            aria-label="Close"
-          >
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <% } %>
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <% } %>
     </div>
 
     <div class="container">
@@ -41,16 +38,8 @@
               action="/api/users/createuser"
               class="form-signin"
             >
-
-              <img
-                class="mb-4"
-                src="https://getbootstrap.com/docs/4.0/assets/brand/bootstrap-solid.svg"
-                alt=""
-                width="72"
-                height="72"
-              />
               <h1 class="h3 mb-3 font-weight-normal">Sign Up</h1>
-              <label for="inputUsername" class="sr-only">Name</label>
+              <!-- <label for="inputUsername" class="sr-only">Name</label>
               <input
                 type="text"
                 name="name"
@@ -59,7 +48,7 @@
                 placeholder="name"
                 required
                 autofocus
-              />
+              /> -->
               <label for="inputUsername" class="sr-only">Email</label>
               <input
                 type="text"
@@ -79,11 +68,7 @@
                 placeholder="password"
                 required
               />
-              <div class="checkbox mb-3">
-                <label>
-                  <input type="checkbox" value="remember-me" /> Remember me
-                </label>
-              </div>
+              <div class="checkbox mb-3"></div>
               <button class="btn btn-lg btn-primary btn-block" type="submit">
                 Register
               </button>
@@ -101,13 +86,6 @@
               action="/api/users/loginbyemail"
               class="form-signin"
             >
-              <img
-                class="mb-4"
-                src="https://getbootstrap.com/docs/4.0/assets/brand/bootstrap-solid.svg"
-                alt=""
-                width="72"
-                height="72"
-              />
               <h1 class="h3 mb-3 font-weight-normal">Log In</h1>
 
               <label for="inputUsername" class="sr-only">Email</label>
@@ -129,11 +107,7 @@
                 placeholder="password"
                 required
               />
-              <div class="checkbox mb-3">
-                <label>
-                  <input type="checkbox" value="remember-me" /> Remember me
-                </label>
-              </div>
+              <div class="checkbox mb-3"></div>
               <button class="btn btn-lg btn-primary btn-block" type="submit">
                 Sign in
               </button>
@@ -142,7 +116,8 @@
           </div>
         </div>
       </div>
-      <% include ./partials/footer %>
+      <div style="min-height: 20vh;"></div>
     </div>
+    <% include ./partials/footer %>
   </body>
 </html>

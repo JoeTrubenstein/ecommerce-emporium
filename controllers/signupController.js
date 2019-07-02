@@ -62,7 +62,7 @@ module.exports = {
         } else {
           let newUser = new User({
             profile: {
-              name: req.body.name,
+              name: req.body.email,
               picture: getGravatar(req.body.email)
             },
             email: req.body.email,
